@@ -1,0 +1,38 @@
+---
+const topTools = [
+  { rank: 1, name: 'SuperDev IDE', category: 'Development', score: 98 },
+  { rank: 2, name: 'TaskMaster Pro', category: 'Productivity', score: 96 },
+  { rank: 3, name: 'DesignWizard', category: 'Design', score: 95 },
+];
+---
+
+<section class="py-12 bg-gray-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Top Rated Tools</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full bg-white rounded-lg shadow-md">
+        <thead>
+          <tr class="bg-blue-600 text-white">
+            <th class="py-3 px-4 text-left">Rank</th>
+            <th class="py-3 px-4 text-left">Name</th>
+            <th class="py-3 px-4 text-left">Category</th>
+            <th class="py-3 px-4 text-left">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          {topTools.map((tool) => (
+            <tr class="border-b border-gray-200 hover:bg-gray-50">
+              <td class="py-3 px-4">{tool.rank}</td>
+              <td class="py-3 px-4 font-semibold">{tool.name}</td>
+              <td class="py-3 px-4">{tool.category}</td>
+              <td class="py-3 px-4">{tool.score}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center mt-8">
+      <a href="/leaderboard" class="text-blue-600 hover:underline">View Full Leaderboard</a>
+    </div>
+  </div>
+</section>

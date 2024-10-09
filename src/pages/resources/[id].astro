@@ -1,0 +1,85 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Button } from '../../components/ui/button';
+
+export function getStaticPaths() {
+  return [
+    {params: {id: '1'}},
+    {params: {id: '2'}},
+    {params: {id: '3'}},
+    {params: {id: '4'}},
+    {params: {id: '5'}},
+    {params: {id: '6'}},
+  ];
+}
+
+const { id } = Astro.params;
+
+const articles = {
+  '1': {
+    title: 'How to build and launch your first SaaS application',
+    category: 'Development',
+    image: '/images/saas-launch.jpg',
+    date: 'Jan 12, 2023',
+    readTime: '12 min read',
+    content: `
+      <p>Building and launching a SaaS (Software as a Service) application can be an exciting and rewarding journey. Here's a step-by-step guide to help you get started:</p>
+
+      <h2>1. Validate Your Idea</h2>
+      <p>Before diving into development, make sure there's a market for your SaaS. Conduct market research, talk to potential customers, and create a minimum viable product (MVP) to test your concept.</p>
+
+      <h2>2. Plan Your Application</h2>
+      <p>Define the core features of your SaaS, create wireframes, and plan your technology stack. Consider factors like scalability, security, and ease of use.</p>
+
+      <h2>3. Design Your User Interface</h2>
+      <p>Create an intuitive and visually appealing interface. Focus on user experience (UX) and ensure your design is responsive for various devices.</p>
+
+      <h2>4. Develop Your SaaS</h2>
+      <p>Start building your application. Use agile methodologies to iterate quickly and gather feedback. Don't forget to implement analytics to track user behavior.</p>
+
+      <h2>5. Test Thoroughly</h2>
+      <p>Conduct extensive testing, including unit tests, integration tests, and user acceptance testing. Fix any bugs and optimize performance.</p>
+
+      <h2>6. Set Up Your Infrastructure</h2>
+      <p>Choose a reliable hosting provider, set up your servers, and ensure you have a robust backup and recovery system in place.</p>
+
+      <h2>7. Implement a Pricing Strategy</h2>
+      <p>Decide on your pricing model (e.g., freemium, tiered pricing) and set up a billing system.</p>
+
+      <h2>8. Prepare for Launch</h2>
+      <p>Create marketing materials, set up a website, and plan your launch strategy. Consider a soft launch to gather initial feedback.</p>
+
+      <h2>9. Launch and Gather Feedback</h2>
+      <p>Launch your SaaS and start onboarding users. Actively seek and respond to user feedback to improve your product.</p>
+
+      <h2>10. Iterate and Grow</h2>
+      <p>Continuously improve your SaaS based on user feedback and usage data. Focus on customer retention and acquisition to grow your business.</p>
+
+      <p>Remember, building a successful SaaS is an ongoing process. Stay flexible, keep learning, and always prioritize your users' needs.</p>
+    `
+  },
+  // Add more articles here...
+};
+
+const article = articles[id];
+---
+
+<BaseLayout title={`${article.title} - Software Directory`} description={`Read our article: ${article.title}`}>
+  <div class="container mx-auto px-4 py-12">
+    <article class="max-w-3xl mx-auto">
+      <h1 class="text-4xl font-bold mb-4">{article.title}</h1>
+      <div class="flex items-center mb-8">
+        <span class="text-primary-600 dark:text-primary-400 font-semibold mr-4">{article.category}</span>
+        <span class="text-gray-500 dark:text-gray-300">{article.date} • {article.readTime}</span>
+      </div>
+      <img src={article.image} alt={article.title} class="w-full h-64 object-cover rounded-2xl mb-8" />
+      <div class="prose dark:prose-invert max-w-none" set:html={article.content} />
+    </article>
+    
+    <div class="mt-12 text-center">
+      <Button asChild variant="outline">
+        <a href="/resources">Back to Resources</a>
+      </Button>
+    </div>
+  </div>
+</BaseLayout>

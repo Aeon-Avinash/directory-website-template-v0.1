@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+export function getStaticPaths() {
+  const allProducts = [
+    { id: 1, name: 'SuperDev IDE', category: 'Development', rating: 4.8, logo: '/logos/superdev.svg', description: 'A powerful IDE for developers' },
+    { id: 2, name: 'TaskMaster Pro', category: 'Productivity', rating: 4.7, logo: '/logos/taskmaster.svg', description: 'Boost your productivity with TaskMaster Pro' },
+    { id: 3, name: 'DesignWizard', category: 'Design', rating: 4.9, logo: '/logos/designwizard.svg', description: 'Create stunning designs with DesignWizard' },
+    { id: 5, name: 'CodeSnippet', category: 'Development', rating: 4.5, logo: '/logos/codesnippet.svg', description: 'Manage and share your code snippets easily' },
+    { id: 6, name: 'FocusFlow', category: 'Productivity', rating: 4.6, logo: '/logos/focusflow.svg', description: 'Stay focused and boost your productivity' },
+    { id: 7, name: 'ColorPalette AI', category: 'Design', rating: 4.7, logo: '/logos/colorpalette.svg', description: 'Generate beautiful color palettes with AI' },
+    { id: 8, name: 'EmailCampaign Pro', category: 'Marketing', rating: 4.4, logo: '/logos/emailcampaign.svg', description: 'Create and manage email campaigns effortlessly' },
+    { id: 9, name: 'BugTracker', category: 'Development', rating: 4.3, logo: '/logos/bugtracker.svg', description: 'Track and manage bugs in your software projects' },
+    { id: 10, name: 'MindMap Maker', category: 'Productivity', rating: 4.5, logo: '/logos/mindmap.svg', description: 'Create beautiful mind maps to organize your thoughts' },
+  ];
+
+  return allProducts.map((product) => ({
+    params: { category: product.category.toLowerCase(), id: product.id.toString() },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<BaseLayout title={`${product.name} - Software Directory`} description={product.description}>
+  <div class="container mx-auto px-4 py-12">
+    <div class="max-w-4xl mx-auto">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8">
+        <div class="flex items-center mb-8">
+          <img src={product.logo} alt={`${product.name} logo`} class="w-24 h-24 mr-6 rounded-full" />
+          <div>
+            <h1 class="text-4xl font-bold mb-2">{product.name}</h1>
+            <p class="text-xl text-primary-600 dark:text-primary-400">{product.category}</p>
+          </div>
+        </div>
+        <div class="flex items-center mb-6">
+          <span class="text-yellow-400 mr-2 text-2xl">★</span>
+          <span class="text-2xl font-semibold">{product.rating.toFixed(1)}</span>
+        </div>
+        <p class="text-lg mb-8">{product.description}</p>
+        <div class="flex justify-between items-center">
+          <a href="#" class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-8 py-3 rounded-full hover:from-primary-600 hover:to-secondary-600 transition duration-300 text-lg font-semibold">Visit Website</a>
+          <a href={`/directory/${product.category.toLowerCase()}`} class="text-primary-600 dark:text-primary-400 hover:underline">Back to {product.category}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

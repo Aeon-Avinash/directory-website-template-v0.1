@@ -1,0 +1,84 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Custom styles */
+:root {
+  --shadow-neu-light: 20px 20px 60px #d1d9e6, -20px -20px 60px #ffffff;
+  --shadow-neu-dark: 20px 20px 60px #1a1a1a, -20px -20px 60px #262626;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Clash Display', sans-serif;
+}
+
+/* Hover effect for card sections */
+.card-section {
+  position: relative;
+}
+
+.card-section:hover .card {
+  opacity: 0.5;
+  transition: all 0.3s;
+}
+
+.card-section .card:hover {
+  opacity: 1;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+/* Glassmorphism effect */
+.glass {
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+}
+
+/* Neumorphism effect */
+.neu-light {
+  background-color: #f3f4f6;
+  box-shadow: var(--shadow-neu-light);
+}
+
+.neu-dark {
+  background-color: #1f2937;
+  box-shadow: var(--shadow-neu-dark);
+}
+
+/* Animations */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0px); }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Blob animation */
+@keyframes blob {
+  0%, 100% { border-radius: 66% 34% 37% 63% / 57% 31% 69% 43%; }
+  25% { border-radius: 37% 63% 51% 49% / 37% 65% 35% 63%; }
+  50% { border-radius: 36% 64% 64% 36% / 64% 48% 52% 36%; }
+  75% { border-radius: 37% 63% 51% 49% / 30% 30% 70% 70%; }
+}
+
+.animate-blob {
+  animation: blob 12s linear infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Add any additional custom styles here */

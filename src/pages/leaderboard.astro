@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LeaderboardTabs from '../components/LeaderboardTabs';
+
+const githubStars = [
+  { rank: 1, name: 'SuperDev IDE', category: 'Development', stars: 15000 },
+  { rank: 2, name: 'TaskMaster Pro', category: 'Productivity', stars: 12000 },
+  { rank: 3, name: 'DesignWizard', category: 'Design', stars: 10000 },
+];
+
+const popularTools = [
+  { rank: 1, name: 'EmailCampaign Pro', category: 'Marketing', traffic: 500000 },
+  { rank: 2, name: 'BugTracker', category: 'Development', traffic: 450000 },
+  { rank: 3, name: 'MindMap Maker', category: 'Productivity', traffic: 400000 },
+];
+
+const trendingTools = [
+  { rank: 1, name: 'AI Code Assistant', category: 'Development', trend: '+200%' },
+  { rank: 2, name: 'Virtual Meeting Pro', category: 'Productivity', trend: '+150%' },
+  { rank: 3, name: 'NFT Creator', category: 'Design', trend: '+120%' },
+];
+---
+
+<BaseLayout title="Leaderboard - Software Directory" description="Check out the top-rated, most popular, and trending software tools across various categories.">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Software Leaderboard</h1>
+    
+    <LeaderboardTabs client:load githubStars={githubStars} popularTools={popularTools} trendingTools={trendingTools} />
+
+    <div class="mt-8 text-center">
+      <a href="#" class="inline-block bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition duration-300">View All Rankings</a>
+    </div>
+  </div>
+</BaseLayout>

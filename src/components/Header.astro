@@ -1,0 +1,25 @@
+---
+import SearchBar from './SearchBar.astro';
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="bg-white dark:bg-gray-800 shadow-md">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold text-blue-600 dark:text-blue-400">SoftwareDirectory</a>
+      <nav class="hidden md:block">
+        <ul class="flex space-x-6">
+          <li><a href="/directory" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Directory</a></li>
+          <li><a href="/leaderboard" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Leaderboard</a></li>
+          <li><a href="/resources" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Resources</a></li>
+          <li><a href="/submit" class="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition duration-300">Submit Listing</a></li>
+        </ul>
+      </nav>
+      <div class="flex items-center space-x-4">
+        <SearchBar />
+        <ThemeToggle />
+        <a href="/submit" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition duration-300">Add a resource</a>
+      </div>
+    </div>
+  </div>
+</header>

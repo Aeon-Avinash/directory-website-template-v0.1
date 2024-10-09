@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CategoryFilter from '../../components/CategoryFilter.astro';
+
+const allProducts = [
+  { id: 1, name: 'SuperDev IDE', category: 'Development', rating: 4.8, logo: '/logos/superdev.svg' },
+  { id: 2, name: 'TaskMaster Pro', category: 'Productivity', rating: 4.7, logo: '/logos/taskmaster.svg' },
+  { id: 3, name: 'DesignWizard', category: 'Design', rating: 4.9, logo: '/logos/designwizard.svg' },
+  { id: 5, name: 'CodeSnippet', category: 'Development', rating: 4.5, logo: '/logos/codesnippet.svg' },
+  { id: 6, name: 'FocusFlow', category: 'Productivity', rating: 4.6, logo: '/logos/focusflow.svg' },
+  { id: 7, name: 'ColorPalette AI', category: 'Design', rating: 4.7, logo: '/logos/colorpalette.svg' },
+  { id: 8, name: 'EmailCampaign Pro', category: 'Marketing', rating: 4.4, logo: '/logos/emailcampaign.svg' },
+  { id: 9, name: 'BugTracker', category: 'Development', rating: 4.3, logo: '/logos/bugtracker.svg' },
+  { id: 10, name: 'MindMap Maker', category: 'Productivity', rating: 4.5, logo: '/logos/mindmap.svg' },
+];
+
+const { category } = Astro.params;
+const { search } = Astro.url.searchParams;
+
+let filteredProducts = allProducts;
+
+if (category) {
+  filteredProducts = allProducts.filter(product => product.category.toLowerCase() === category.toLowerCase());
+}
+
+if (search) {
+  filteredProducts = filteredProducts.filter(product => 
+    product.name.toLowerCase().includes(search.toLowerCase()) ||
+    product.category.toLowerCase().includes(search.toLowerCase())
+  );
+}
+
+const title = search ? `Software Directory Custom Search: ${search}` : "Software Directory - All Products";
+---
+
+<BaseLayout title={title} description="Browse all software tools and products in our comprehensive directory.">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">{title}</h1>
+    <div class="flex flex-col lg:flex-row gap-8">
+      <aside class="lg:w-1/4">
+        <CategoryFilter selectedCategory={category} />
+      </aside>
+      <div class="lg:w-3/4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredProducts.map((product) => (
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 flex flex-col card transition-all duration-300 hover:shadow-lg">
+              <div class="flex items-center mb-4">
+                <img src={product.logo} alt={`${product.name} logo`} class="w-16 h-16 mr-4 rounded-full" />
+                <div>
+                  <h3 class="text-xl font-semibold">{product.name}</h3>
+                  <p class="text-primary-600 dark:text-primary-400">{product.category}</p>
+                </div>
+              </div>
+              <div class="flex items-center mb-4">
+                <span class="text-yellow-400 mr-1">★</span>
+                <span>{product.rating.toFixed(1)}</span>
+              </div>
+              <a href={`/directory/${product.category.toLowerCase()}/${product.id}`} class="mt-auto bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-secondary-600 transition duration-300 text-center transform hover:scale-105">View Details</a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

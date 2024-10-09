@@ -1,0 +1,41 @@
+---
+const categories = [
+  { name: 'Development Tools', count: 42, slug: 'development' },
+  { name: 'Productivity', count: 38, slug: 'productivity' },
+  { name: 'Design', count: 27, slug: 'design' },
+  { name: 'Marketing', count: 31, slug: 'marketing' },
+  { name: 'Analytics', count: 19, slug: 'analytics' },
+];
+
+const { selectedCategory } = Astro.props;
+---
+
+<div class="bg-gray-100 dark:bg-gray-600 rounded-lg shadow-md p-6">
+  <h2 class="text-xl dark:text-gray-100 font-semibold tracking-tight mb-4">Filter by category</h2>
+  <form id="categoryForm">
+    <ul class="space-y-2">
+      {categories.map((category) => (
+        <li>
+          <label class="flex items-center">
+            <input type="radio" name="category" value={category.slug} class="form-radio text-blue-500" checked={selectedCategory === category.slug} />
+            <span class="ml-2 text-gray-700 dark:text-gray-100">{category.name}</span>
+            <span class="ml-auto text-gray-500 dark:text-gray-300 text-sm">{category.count}</span>
+          </label>
+        </li>
+      ))}
+    </ul>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('categoryForm');
+  const radios = form.querySelectorAll('input[type="radio"]');
+
+  radios.forEach((radio) => {
+    radio.addEventListener('change', () => {
+      if (radio.checked) {
+        window.location.href = `/directory/${radio.value}`;
+      }
+    });
+  });
+</script>

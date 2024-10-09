@@ -1,0 +1,29 @@
+---
+const latestListings = [
+  { id: 5, name: 'CodeSnippet', category: 'Development', date: '2023-05-15', logo: '/logos/codesnippet.svg' },
+  { id: 6, name: 'FocusFlow', category: 'Productivity', date: '2023-05-14', logo: '/logos/focusflow.svg' },
+  { id: 7, name: 'ColorPalette AI', category: 'Design', date: '2023-05-13', logo: '/logos/colorpalette.svg' },
+  { id: 8, name: 'EmailCampaign Pro', category: 'Marketing', date: '2023-05-12', logo: '/logos/emailcampaign.svg' },
+  { id: 9, name: 'BugTracker', category: 'Development', date: '2023-05-11', logo: '/logos/bugtracker.svg' },
+  { id: 10, name: 'MindMap Maker', category: 'Productivity', date: '2023-05-10', logo: '/logos/mindmap.svg' },
+];
+---
+
+<section class="mb-20">
+  <h2 class="text-4xl font-bold mb-10 text-center">Latest Additions</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 card-section">
+    {latestListings.map((listing) => (
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md p-6 flex items-center card transition-all duration-300 hover:shadow-lg">
+        <img src={listing.logo} alt={`${listing.name} logo`} class="w-16 h-16 mr-4 rounded-full" />
+        <div>
+          <h3 class="text-2xl font-semibold mb-1">{listing.name}</h3>
+          <p class="text-primary-600 dark:text-primary-400 mb-2">{listing.category}</p>
+          <p class="text-sm text-gray-500 dark:text-gray-400">Added on {new Date(listing.date).toLocaleDateString()}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="text-center mt-12">
+    <a href="/directory" class="bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-8 py-4 rounded-full hover:from-primary-600 hover:to-secondary-600 transition duration-300 text-lg font-semibold inline-block transform hover:scale-105">Browse All Products</a>
+  </div>
+</section>

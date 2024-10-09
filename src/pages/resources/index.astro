@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Button } from '../../components/ui/button';
+
+const featuredArticle = {
+  id: 1,
+  title: 'How to build and launch your first SaaS application',
+  category: 'Development',
+  image: '/images/saas-launch.jpg',
+  date: 'Jan 12, 2023',
+  readTime: '12 min read'
+};
+
+const latestArticles = [
+  { id: 2, title: '10 product design tips to make users fall in love with your app', category: 'Design', image: '/images/product-design.jpg', date: 'Jan 10, 2023', readTime: '8 min read' },
+  { id: 3, title: 'The best methodology to design innovative products', category: 'Design', image: '/images/innovative-design.jpg', date: 'Jan 8, 2023', readTime: '10 min read' },
+  { id: 4, title: '20 apps for productivity and business management', category: 'Productivity', image: '/images/productivity-apps.jpg', date: 'Jan 6, 2023', readTime: '15 min read' },
+  { id: 5, title: 'How to get funding for your first SaaS product', category: 'Business', image: '/images/saas-funding.jpg', date: 'Jan 4, 2023', readTime: '18 min read' },
+  { id: 6, title: '4 step guide to a successful product launch', category: 'Marketing', image: '/images/product-launch.jpg', date: 'Jan 2, 2023', readTime: '9 min read' },
+];
+---
+
+<BaseLayout title="Resources - Software Directory" description="Explore our collection of articles, guides, and resources for software developers, designers, and entrepreneurs.">
+  <div class="container mx-auto px-4 py-12">
+    <h1 class="text-4xl font-bold mb-8 text-center">Resources Center</h1>
+    
+    <div class="mb-12">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden">
+        <div class="md:flex">
+          <div class="md:flex-shrink-0">
+            <img class="h-48 w-full object-cover md:w-48" src={featuredArticle.image} alt={featuredArticle.title} />
+          </div>
+          <div class="p-8">
+            <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold">{featuredArticle.category}</div>
+            <a href={`/resources/${featuredArticle.id}`} class="block mt-1 text-2xl leading-tight font-bold text-black dark:text-white hover:underline">{featuredArticle.title}</a>
+            <p class="mt-2 text-gray-500 dark:text-gray-300">{featuredArticle.date} • {featuredArticle.readTime}</p>
+            <Button client:load asChild class="mt-4">
+              <a href={`/resources/${featuredArticle.id}`}>Read article</a>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <h2 class="text-3xl font-bold mb-6">Latest articles</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {latestArticles.map((article) => (
+        <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-md overflow-hidden">
+          <img class="h-48 w-full object-cover" src={article.image} alt={article.title} />
+          <div class="p-6">
+            <div class="uppercase tracking-wide text-sm text-primary-600 dark:text-primary-400 font-semibold">{article.category}</div>
+            <a href={`/resources/${article.id}`} class="block mt-2 text-xl leading-tight font-semibold text-black dark:text-white hover:underline">{article.title}</a>
+            <p class="mt-2 text-gray-500 dark:text-gray-300">{article.date} • {article.readTime}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-12 text-center">
+      <Button client:load variant="outline">Load More Articles</Button>
+    </div>
+  </div>
+</BaseLayout>
